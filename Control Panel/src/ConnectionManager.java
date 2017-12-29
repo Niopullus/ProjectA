@@ -1,3 +1,5 @@
+import panelConfig.PanelConfig;
+
 import java.io.OutputStream;
 import java.util.List;
 
