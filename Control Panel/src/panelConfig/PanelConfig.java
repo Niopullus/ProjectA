@@ -1,9 +1,6 @@
 package panelConfig;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Properties;
 
 public class PanelConfig {
@@ -23,8 +20,10 @@ public class PanelConfig {
         properties = propertiesLoader.getProperties();
     }
 
-    public int getPort() {
-        return 0; //temp
+    public int getServerPort() {
+        final String portString;
+        portString = properties.getProperty(PropertyKeys.SERVERPORT);
+        return Integer.parseInt(portString);
     }
 
 }

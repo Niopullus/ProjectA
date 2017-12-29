@@ -11,10 +11,10 @@ class PropertiesLoader {
     private File source;
     private Properties properties;
     private FileInputStream fileInputStream;
+    private DefaultPropertiesGenerator defaultPropertiesGenerator;
 
     PropertiesLoader() {
         super();
-        properties = new Properties();
     }
 
     void setSource(final File source) {
@@ -26,20 +26,40 @@ class PropertiesLoader {
     }
 
     void loadProperties() {
-        fileInputStream = getFileInputStream();
+        createDefaultProperties();
+        if (sourceExists()) {
+            createFileInputStream();
+            loadPropertiesFromStream();
+        } else {
+            defaultPropertiesGenerator.save();
+        }
+    }
+
+    private void createDefaultProperties() {
+        final Properties defaultProperties;
+        defaultPropertiesGenerator = new DefaultPropertiesGenerator(source);
+        defaultPropertiesGenerator.generate();
+        defaultProperties = defaultPropertiesGenerator.getDefaultProperties();
+        properties = new Properties(defaultProperties);
+    }
+
+    private boolean sourceExists() {
+        return fileInputStream != null;
+    }
+
+    private void createFileInputStream() {
         try {
-            properties.load(fileInputStream);
-        } catch (final IOException e) {
+            fileInputStream = new FileInputStream(source);
+        } catch (final FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private FileInputStream getFileInputStream() {
+    private void loadPropertiesFromStream() {
         try {
-            return new FileInputStream(source);
-        } catch (final FileNotFoundException e) {
+            properties.load(fileInputStream);
+        } catch (final IOException e) {
             e.printStackTrace();
-            return null;
         }
     }
 
