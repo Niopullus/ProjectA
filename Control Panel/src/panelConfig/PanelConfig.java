@@ -22,7 +22,7 @@ public class PanelConfig {
 
     public int getServerPort() {
         final String portString;
-        portString = properties.getProperty(PropertyKeys.SERVERPORT);
+        portString = properties.getProperty(PropertyKeys.SERVER_PORT);
         return Integer.parseInt(portString);
     }
 

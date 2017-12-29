@@ -1,9 +1,6 @@
 package panelConfig;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 class PropertiesLoader {
@@ -12,6 +9,8 @@ class PropertiesLoader {
     private Properties properties;
     private FileInputStream fileInputStream;
     private DefaultPropertiesGenerator defaultPropertiesGenerator;
+
+    private static String REQUIRED_PROPERTIES_EXTENSION = ".properties";
 
     PropertiesLoader() {
         super();
@@ -26,12 +25,21 @@ class PropertiesLoader {
     }
 
     void loadProperties() {
+        verifySourceExtension();
         createDefaultProperties();
         if (sourceExists()) {
             createFileInputStream();
             loadPropertiesFromStream();
         } else {
             defaultPropertiesGenerator.save();
+        }
+    }
+
+    private void verifySourceExtension() {
+        final String extension;
+        extension = PanelConfigUtilities.extractExtensionFromFile(source);
+        if (!extension.equals(REQUIRED_PROPERTIES_EXTENSION)) {
+            throw new PanelConfigException(PanelConfigException.REASON_INVALID_FILE_EXTENSION);
         }
     }
 

@@ -15,6 +15,7 @@ class DefaultPropertiesGenerator {
     private FileOutputStream fileOutputStream;
 
     private static final String DEFAULT_SERVER_PORT = "00000";
+    private static final String DEFAULT_SERVER_PROGRAM_PATH = "/programs/server/Server.jar";
 
     DefaultPropertiesGenerator(final File source) {
         super();
@@ -27,7 +28,8 @@ class DefaultPropertiesGenerator {
     }
 
     void generate() {
-        defaultProperties.setProperty(SERVERPORT, DEFAULT_SERVER_PORT);
+        defaultProperties.setProperty(SERVER_PORT, DEFAULT_SERVER_PORT);
+        defaultProperties.setProperty(SERVER_PROGRAM_PATH, DEFAULT_SERVER_PROGRAM_PATH);
     }
 
     void save() {
