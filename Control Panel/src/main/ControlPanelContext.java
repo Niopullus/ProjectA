@@ -1,41 +1,41 @@
 package main;
 
-import connection.ConnectionManager;
+import client.ClientConnector;
 import panelConfig.PanelConfig;
-import server.ServerManager;
+import server.ProgramRequestProcessor;
 
 public class ControlPanelContext {
 
-    private ConnectionManager connectionManager;
-    private ServerManager serverManager;
+    private ClientConnector clientConnector;
+    private ProgramRequestProcessor programRequestProcessor;
     private PanelConfig config;
 
-    ControlPanelContext() {
+    public ControlPanelContext() {
         super();
     }
 
-    public ConnectionManager getConnectionManager() {
-        return connectionManager;
+    public ClientConnector getClientConnector() {
+        return clientConnector;
     }
 
     public PanelConfig getConfig() {
         return config;
     }
 
-    public ServerManager getServerManager() {
-        return serverManager;
+    public ProgramRequestProcessor getProgramRequestProcessor() {
+        return programRequestProcessor;
     }
 
     public void setConfig(final PanelConfig config) {
         this.config = config;
     }
 
-    public void setConnectionManager(final ConnectionManager connectionManager) {
-        this.connectionManager = connectionManager;
+    public void setClientConnector(final ClientConnector clientConnector) {
+        this.clientConnector = clientConnector;
     }
 
-    public void setServerManager(final ServerManager serverManager) {
-        this.serverManager = serverManager;
+    public void setProgramRequestProcessor(final ProgramRequestProcessor programRequestProcessor) {
+        this.programRequestProcessor = programRequestProcessor;
     }
 
 }

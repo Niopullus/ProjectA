@@ -1,15 +1,15 @@
 package server;
 
-import lib.niodatatransmission.tether.TransmissionTether;
 import main.ControlPanelContext;
+import server.tether.ServerTether;
 
-public class ServerIOManager implements Runnable {
+public class ProgramDataReceiver implements Runnable {
 
     private ServerTether tether;
     private ControlPanelContext context;
-    private ServerInputManager serverInputManager;
+    private ProgramDataInputProcessor programDataInputProcessor;
 
-    public ServerIOManager(final ServerTether tether, final ControlPanelContext context) {
+    public ProgramDataReceiver(final ServerTether tether, final ControlPanelContext context) {
         this.tether = tether;
         this.context = context;
     }
@@ -29,7 +29,7 @@ public class ServerIOManager implements Runnable {
     }
 
     public void addLogObserver(final int connectionID) {
-        serverInputManager.addLogObserver(connectionID);
+        programDataInputProcessor.addLogObserver(connectionID);
     }
 
 }

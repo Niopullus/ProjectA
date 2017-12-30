@@ -1,27 +1,27 @@
-package connection;
+package client;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ConnectionMap {
+public class ClientIDConnectionMap {
 
-    private Map<Integer, ConnectionIOManager> connections;
+    private Map<Integer, ClientDataReceiver> connections;
 
-    public ConnectionMap() {
+    public ClientIDConnectionMap() {
         super();
         connections = new HashMap<>();
     }
 
-    public ConnectionIOManager getConnection(final int connectionID) {
+    public ClientDataReceiver getConnection(final int connectionID) {
         return connections.get(connectionID);
     }
 
-    public Collection<ConnectionIOManager> getConnections() {
+    public Collection<ClientDataReceiver> getConnections() {
         return connections.values();
     }
 
-    public void put(final int connectionID, final ConnectionIOManager connection) {
+    public void put(final int connectionID, final ClientDataReceiver connection) {
         connections.put(connectionID, connection);
     }
 

@@ -1,16 +1,19 @@
 package main;
 
-import connection.ConnectionManager;
+import client.ClientConnector;
 import panelConfig.PanelConfig;
-import server.ServerManager;
+import server.IDProgramConnectionMap;
+import server.ProgramRequestProcessor;
+import server.ProgramStatusTracker;
 
 import java.io.File;
 
 public class ControlPanel {
 
     private ControlPanelContext context;
-    private ConnectionManager connectionManager;
-    private ServerManager serverManager;
+    private ClientConnector clientConnector;
+    private ProgramRequestProcessor programRequestProcessor;
+    private ProgramStatusTracker programStatusTracker;
     private PanelConfig panelConfig;
 
     private static final String CONFIG_PATH = "/config/config.properties";
@@ -19,13 +22,12 @@ public class ControlPanel {
         super();
         context = new ControlPanelContext();
         createConnectionManager();
-        createServerManager();
+        createProgramStatusTracker();
         updateContext();
     }
 
     void start() {
-        connectionManager.start();
-        serverManager.start();
+        clientConnector.start();
     }
 
     void stop() {
@@ -39,17 +41,20 @@ public class ControlPanel {
     }
 
     private void createConnectionManager() {
-        connectionManager = new ConnectionManager(context);
+        clientConnector = new ClientConnector(context);
     }
 
-    private void createServerManager() {
-        serverManager = new ServerManager();
+    private void createProgramStatusTracker() {
+        final IDProgramConnectionMap programs;
+        programStatusTracker = new ProgramStatusTracker(context);
+        programs = programStatusTracker.getPrograms();
+        programRequestProcessor = new ProgramRequestProcessor(programs);
     }
 
     private void updateContext() {
         context.setConfig(panelConfig);
-        context.setConnectionManager(connectionManager);
-        context.setServerManager(serverManager);
+        context.setClientConnector(clientConnector);
+        context.setProgramRequestProcessor(programRequestProcessor);
     }
 
 }

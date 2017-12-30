@@ -1,17 +1,16 @@
 package server;
 
-import connection.ConnectionIOManager;
 import lib.niodatatransmission.data.DataPacket;
 import main.ControlPanelContext;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServerInputManager {
+public class ProgramDataInputProcessor {
 
     private ControlPanelContext context;
     private List<Integer> logObservers;
 
-    public ServerInputManager(final ControlPanelContext context) {
+    public ProgramDataInputProcessor(final ControlPanelContext context) {
         this.context = context;
         logObservers = new ArrayList<>();
     }

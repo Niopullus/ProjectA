@@ -3,20 +3,20 @@ package server;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServerMap {
+public class IDProgramConnectionMap {
 
-    private Map<Integer, ServerIOManager> servers;
+    private Map<Integer, ProgramDataReceiver> servers;
 
-    public ServerMap() {
+    public IDProgramConnectionMap() {
         super();
         servers = new HashMap<>();
     }
 
-    public ServerIOManager getServer(final int serverID) {
+    public ProgramDataReceiver getProgram(final int serverID) {
         return servers.get(serverID);
     }
 
-    public void put(final int serverID, final ServerIOManager serverIOManager) {
+    public void put(final int serverID, final ProgramDataReceiver serverIOManager) {
         servers.put(serverID, serverIOManager);
     }
 

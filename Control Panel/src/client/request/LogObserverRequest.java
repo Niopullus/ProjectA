@@ -1,4 +1,4 @@
-package connection.request;
+package client.request;
 
 import lib.niodatatransmission.data.DataPacket;
 import lib.niopullus.niodatatree.DataTree;
